@@ -17,7 +17,7 @@ Designar a origem repositório remoto do local
 
 ##### **OBS:** No lugar de escrever o URL do repositório remoto, escreve-se `origin` no terminal.
 \
-Adicionar mudanças ao *staging area*
+Adicionar mudanças à *staging area*
 
     git add {diretório}
 
@@ -64,5 +64,25 @@ Criar uma nova *branch*
     # Cria e muda para tal branch
     git checkout -b {branch}
 
+Clonar um repositório remoto
 
+    git clone {link} {diretorio destino}
+
+##### **OBS:** O diretorio destino nao e obrigatorio.                                                                                         
+\
+[git rebase](https://livebook.manning.com/concept/git/git-rebase#:~:text=The%20git%20rebase%20command%20is,modifying%2C%20and%20even%20deleting%20commits.)
 # Primeira Entrega
+
+Recriar o HTML da seguinte página:
+
+![Tela](./static/tela.png)
+
+Para essa entrega pedimos que vocês façam um post do Facebook, seguindo as respectivas regras:
+
+- O post deverá conter a mesma foto de publicação e o mesmo nome de usuário (Fluxo
+Consultoria), mas pedimos que coloquem na legenda a opinião de vocês sobre o PAME até agora,
+incluindo um ponto que poderíamos desenvolver para melhorar sua experiência
+- O código deverá ser colocado no GitHub;
+
+Os ícones do Facebook que vocês precisarão utilizar, serão enviados para vocês e o prazo da entrega
+é para 17:00 do dia 29/06/2021.
