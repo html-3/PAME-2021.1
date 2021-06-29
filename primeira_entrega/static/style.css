@@ -1,56 +1,50 @@
 *{
   padding: 0%;
   margin: 0%;
-  }
-html{
-  height: auto;
-  overflow-x: hidden;
-  overflow-y: hidden;
   font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
   color:#ECF3FF;
-  }
-a{
-  font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
-  color:#ECF3FF;
-  font-size: 80%;
-  text-decoration: none;
-  font-weight: bold;
-  }
-p{
-  font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
-  color:#ECF3FF;
-  font-size: 80%;
+  font-size: 11px;
   text-decoration: none;
   font-weight: bold;
   word-wrap: break-word;
   }
-a:hover {
+html{
+  height: auto;
+  overflow-x: hidden;
+  }
+a:hover, a2:hover {
     text-decoration: underline;
   }
+a2{
+  color: rgb(176,179,184);
+  cursor: pointer;
+}
 body{
     background-color: #18191a;
   }
 .container{
-  height: auto;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
 }
 .image-background{
     background-color: black;
-    width: 73%;
     height: auto;
-    display: flex;
-    justify-content: center;
+    width: 73%;
+    position: relative;
   }
 #image{
-  height: 57%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   }
 .sidebar{
   background-color: rgb(36,37,38);
   height: auto;
-  width: 27%;
+  width: 283px;
 }
 .sidebar-menu{
   display: flex;
@@ -68,11 +62,12 @@ body{
   justify-content: center;
   align-items: center;
   margin-right: 10px;
-  cursor:pointer;
+  cursor: pointer;
 }
 .button-icon{
   height: 20px;
   width: 20px;
+  cursor: pointer;
 }
 .sidebar-comments{
   display: flex;
@@ -99,3 +94,7 @@ body{
 .author-text{
   padding: 0px 14px 14px 14px;
 }
+.status{
+  padding: 0px 7px 14px 14px;
+}
+#more {display: none;}
