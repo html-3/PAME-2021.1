@@ -3,7 +3,7 @@
   margin: 0%;
   font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
   color:#ECF3FF;
-  font-size: 11px;
+  font-size: 14px;
   text-decoration: none;
   font-weight: bold;
   word-wrap: break-word;
@@ -11,6 +11,7 @@
 html{
   height: auto;
   overflow-x: hidden;
+  overflow-y: hidden;
   }
 a:hover, a2:hover {
     text-decoration: underline;
@@ -20,7 +21,11 @@ a2{
   cursor: pointer;
 }
 body{
-    background-color: #18191a;
+  height: 100vh;
+  background-color: #18191a;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   }
 .container{
   height: 100%;
@@ -29,53 +34,73 @@ body{
   justify-content: space-between;
 }
 .image-background{
-    background-color: black;
-    height: auto;
-    width: 73%;
-    position: relative;
-  }
+  background-color: black;
+  height: auto;
+  width: 80%;
+  position: relative;
+}
+.overlay{
+  display: flex;
+  flex-direction: colum;
+}
+.overlay-top{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1vh 5vh 0vh 3vh;
+}
+.overlay-top-left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 #image{
   height: 100%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   }
 .sidebar{
+  width: 38vh;
   background-color: rgb(36,37,38);
   height: auto;
-  width: 283px;
+  overflow-y: scroll;
 }
 .sidebar-menu{
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 10px 0px 10px 0px;
-  border-bottom:1px solid #4B4C4F;
+  padding: 1vh 0vh 1vh 0vh;
+  border-bottom: 0.1vh solid #4B4C4F;
 }
 .button{
-  height: 35px;
-  width: 35px;
+  height: 4vh;
+  width: 4vh;
   background-color: #4B4C4F;
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 1vh;
   cursor: pointer;
 }
 .button-icon{
-  height: 20px;
-  width: 20px;
+  height: 2vh;
+  width: 2vh;
   cursor: pointer;
 }
 .sidebar-comments{
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
 }
 .author-bar{
-  padding: 14px;
+  padding: 2vh;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -84,7 +109,8 @@ body{
 .author-data{
   display: flex;
   flex-direction: row;
-  align-items: left;
+  align-items: center;
+  justify-content: left;
 }
 .author-data-text{
   display: flex;
@@ -92,9 +118,48 @@ body{
   align-items: left;
 }
 .author-text{
-  padding: 0px 14px 14px 14px;
+  font-weight: normal;
+  font-size: 15px;
+  padding: 0vh 1vh 1vh 2vh;
 }
 .status{
-  padding: 0px 7px 14px 14px;
+  padding: 0vh 1vh 2vh 2vh;
+  border-bottom: 0.1vh solid #4B4C4F;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.actions{
+  padding: 1vh 1vh 1vh 2vh;
+  border-bottom: 0.1vh solid #4B4C4F;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.comentario-container{
+  padding: 1vh 1vh 1vh 1vh;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+.comentario{
+  padding: 1vh;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #4B4C4F;
+  border-radius: 20px;
+}
+.comentar{
+  width: 25vh;
+  height: 3vh;
+  padding-left: 1vh;
+  text-align: left;
+  background-color: #4B4C4F;
+  border-radius: 20px;
+  border: 0px;
 }
 #more {display: none;}
