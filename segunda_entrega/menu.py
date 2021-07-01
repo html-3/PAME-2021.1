@@ -6,6 +6,13 @@ from data import criarDadosTeste
 
 discentes, docentes, materias, turmas = criarDadosTeste()
 
+# listagem de alunos duma turma nao eh alfabetica
+# listagem de turmas nao eh feita por tamanho
+# remocao de docentes, turmas, materias, discentes da database nao implementada
+# base de dados existe apenas enquanto o codigo roda, nao e salvo em outro documento
+# menu pode ser mais legivel e melhor comentado
+# base de dados sao listas de instancias de classe
+
 # n[0] -> menu principal
 # n[1] -> menu turmas
 # n[2] -> escolher turma
@@ -294,7 +301,6 @@ while n[0] != 0:
             elif n[1] == 0:
                 print("Saindo do menu turmas...")
 
-    
     # fechar programa
     elif n[0] == 0:
         print("Saindo do programa...")
