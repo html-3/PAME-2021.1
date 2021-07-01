@@ -8,4 +8,4 @@ class Materia():
         self.turmas = turmas
 
     def __repr__(self):
-        return f"{self.nome.ljust(30)}"
+        return f"{self.nome.ljust(30)}  {self.turmas}"

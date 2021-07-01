@@ -12,4 +12,4 @@ class Discente():
         self.turmas = turmas
     
     def __repr__(self):
-        return f"{self.dre.ljust(9)}  {self.nome.ljust(20)} {self.curso.ljust(40)}" 
+        return f"{self.dre.ljust(9)}  {self.nome.ljust(20)}  {self.curso.ljust(40)}  {self.turmas}" 

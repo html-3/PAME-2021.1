@@ -10,4 +10,4 @@ class Docente():
         self.turmas = turmas
     
     def __repr__(self):
-        return f"{self.nome.ljust(20)}  {self.departamento.ljust(40)}"
+        return f"{self.nome.ljust(20)}  {self.departamento.ljust(40)}  {self.turmas}"
