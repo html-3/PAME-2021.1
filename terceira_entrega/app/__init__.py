@@ -1,7 +1,6 @@
-import re
 from flask import Flask
-from config import Config
-from extensions import db, migrate
+from .config import Config
+from .extensions import db, migrate
 
 def create_app():
     app = Flask(__name__)

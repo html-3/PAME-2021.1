@@ -1,4 +1,4 @@
-from extensions import db
+from app.extensions import db
 
 # id = chave primaria
 # nome = nome completo: tamanho 30, obrigatoria, unica
@@ -6,15 +6,15 @@ from extensions import db
 # cel = celular do medico: tamanho 15, default
 # email = email do medico: tamanho 30, default
 
-# contatos da clinica (placeholder)
-# salvar em um lugar mais apropriado
-tel_clinica = "(21) 99999-9999"
-email_clinica = "clinica.marcus@gmail.com"
-
-class Medicos(db.Model):
+class Medico(db.Model):
 
     # nome da tabela
     __tablename__ = "médicos"
+
+    # contatos da clinica (placeholder)
+    # salvar em um lugar mais apropriado
+    tel_clinica = "(21) 99999-9999"
+    email_clinica = "clinica.marcus@gmail.com"
 
     # id de cada elemento da tabela
     id = db.Column(db.Integer, primary_key=True)

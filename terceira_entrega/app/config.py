@@ -8,7 +8,7 @@ class Config():
     DEBUG = True
 
     # configuracao da database
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///'+os.path.join(basedir, "site.db")
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, "site.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # configuracao da comunicacao com o front-end

@@ -1,4 +1,4 @@
-from extensions import db
+from app.extensions import db
 
 # id = chave primaria
 # horario = hora e dia da consulta: (ano, mes, dia), obrigatoria, unica
@@ -19,7 +19,7 @@ class Consulta(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     # horario (usar outro tipo que nao seja string)
-    horario = db.Column(db.Datetime, nullable=False, unique=True)
+    horario = db.Column(db.DateTime(), nullable=False, unique=True)
 
     # paciente (one-to-one)
     paciente_id = db.Column(db.Integer, db.ForeignKey('paciente.id'))

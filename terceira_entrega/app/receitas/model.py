@@ -1,7 +1,8 @@
-from extensions import db
+from datetime import date
+from app.extensions import db
 
 # id = chave primaria
-# data = data de expedicao: (ano, mes, dia), obrigatoria
+# data = data de expedicao: default
 # cont = conteudo da receita: tamanho 300, obrigatoria
 
 # paciente_id = id do paciente:
@@ -19,7 +20,7 @@ class Receita(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     # data de expedicao
-    data = db.Column(db.Datetime, nullable=False)
+    data = db.Column(db.DateTime, default=date.today)
 
     # conteudo
     cont = db.Column(db.String(300), nullable=False)

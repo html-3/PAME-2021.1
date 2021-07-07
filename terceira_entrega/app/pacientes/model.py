@@ -1,4 +1,4 @@
-from extensions import db
+from app.extensions import db
 
 # id = chave primaria
 # nome = nome completo: tamanho 30, obrigatoria
