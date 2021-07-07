@@ -2,7 +2,7 @@ from extensions import db
 
 # id = chave primaria
 # nome = nome completo: tamanho 30, obrigatoria, unica
-# esp = especializacao: tamanho 10, obrigatoria
+# esp = especializacao: tamanho 15, obrigatoria
 # cel = celular do medico: tamanho 15, default
 # email = email do medico: tamanho 30, default
 
@@ -23,7 +23,8 @@ class Medicos(db.Model):
     nome = db.Column(db.String(30), nullable=False, unique=True)
 
     # especializacao
-    esp = db.Column(db.String(10), nullable=False)
+    # obstetra, ginecologista e pediatra.
+    esp = db.Column(db.String(15), nullable=False)
 
     # contato (numero)
     cel = db.Column(db.String(15), default=tel_clinica)
@@ -31,6 +32,9 @@ class Medicos(db.Model):
     # contato (email)
     email = db.Column(db.String(30), default=email_clinica)
     
+    # consultas (one-to-many)
+    consultas = db.relationship("Consulta", cascade="all, delete", backref="medicos", lazy=True)
+
     # impressao da classe
     def __repr__(self):
         return f"Médico: {self.nome} - {self.esp} - {self.email}"
