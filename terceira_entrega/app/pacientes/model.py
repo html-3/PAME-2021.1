@@ -40,12 +40,12 @@ class Paciente(db.Model):
     # consultas (one-to-many)
     # uma consulta pode ser de apenas um paciente
     # um paciente pode ter varias consultas
-    consultas = db.relationship("Consultas", backref='paciente', lazy=True)
+    consultas = db.relationship("Consulta", backref='paciente', lazy=True)
 
     # examens medicos (one-to-many)
     # um exame pode ser de apenas um paciente
     # um paciente pode ter varios exames
-    exames = db.relationship("Consultas", backref='paciente', lazy=True)
+    exames = db.relationship("Exame", backref='paciente', lazy=True)
 
     # impressao da classe
     def __repr__(self):
