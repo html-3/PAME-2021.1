@@ -14,7 +14,7 @@ from app.extensions import db
 class Receita(db.Model):
 
     # nome da tabela
-    __tablename__ = "receitas"
+    #__tablename__ = "receitas"
 
     # id de cada elemento da tabela
     id = db.Column(db.Integer, primary_key=True)
@@ -25,15 +25,15 @@ class Receita(db.Model):
     # conteudo
     cont = db.Column(db.String(300), nullable=False)
 
-    # paciente (one-to-one)
+    # paciente (one-to-many)
+    # uma receita pode ser de apenas um paciente
+    # um paciente pode ter varias receitas
     paciente_id = db.Column(db.Integer, db.ForeignKey('paciente.id'))
-    # este nao aparece na db, apenas estabelece a relacao
-    paciente = db.relationship("Paciente", cascade="all, delete", backref="receitas", lazy=True)
 
     # medico (one-to-one)
+    # uma receita pode ser prescrita por apenas um medico
+    # um medico pode prescrever varias receitas
     medico_id = db.Column(db.Integer, db.ForeignKey('medico.id'))
-    # este nao aparece na db, apenas estabelece a relacao
-    medico = db.relationship("Medico", cascade="all, delete", backref="receitas", lazy=True)
 
     # impressao da classe
     def __repr__(self):

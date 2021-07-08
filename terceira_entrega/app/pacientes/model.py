@@ -7,13 +7,12 @@ from app.extensions import db
 # email = email do medico: tamanho 30, obrigatoria, unica
 # plano_saude = plano de saude: tamanho 40, obrigatoria
 
-# receita_id = id da receita:
-# receita = receita (instancia):
+# receitas = receitas (relacionamento):
 
 class Paciente(db.Model):
 
     # nome da tabela
-    __tablename__ = "pacientes"
+    #__tablename__ = "pacientes"
 
     # id de cada elemento da tabela
     id = db.Column(db.Integer, primary_key=True)
@@ -33,10 +32,20 @@ class Paciente(db.Model):
     # nome e tipo do plano de saude
     plano_saude = db.Column(db.String(40), nullable=False)
 
-    # prescricoes (many-to-one)
-    receita_id = db.Column(db.Integer, db.ForeignKey('receita.id'))
-    # este nao aparece na db, apenas estabelece a relacao
-    receita = db.relationship("Receita", cascade="all, delete", backref="pacientes", lazy=True)
+    # prescricoes (one-to-many)
+    # uma receita pode ter apenas um paciente
+    # um paciente pode ter varias receitas
+    receitas = db.relationship("Receita", backref='paciente', lazy=True)
+
+    # consultas (one-to-many)
+    # uma consulta pode ser de apenas um paciente
+    # um paciente pode ter varias consultas
+    consultas = db.relationship("Consultas", backref='paciente', lazy=True)
+
+    # examens medicos (one-to-many)
+    # um exame pode ser de apenas um paciente
+    # um paciente pode ter varios exames
+    exames = db.relationship("Consultas", backref='paciente', lazy=True)
 
     # impressao da classe
     def __repr__(self):

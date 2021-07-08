@@ -6,10 +6,13 @@ from app.extensions import db
 # cel = celular do medico: tamanho 15, default
 # email = email do medico: tamanho 30, default
 
+# receitas = receitas (relacionamento):
+# consultas = receitas (relacionamento):
+
 class Medico(db.Model):
 
     # nome da tabela
-    __tablename__ = "médicos"
+    #__tablename__ = "médicos"
 
     # contatos da clinica (placeholder)
     # salvar em um lugar mais apropriado
@@ -32,8 +35,15 @@ class Medico(db.Model):
     # contato (email)
     email = db.Column(db.String(30), default=email_clinica)
     
-    # consultas (one-to-many)
-    consultas = db.relationship("Consulta", cascade="all, delete", backref="medicos", lazy=True)
+    # medico (one-to-many)
+    # uma receita pode ser prescrita por apenas um medico
+    # um medico pode prescrever varias receitas
+    receitas = db.relationship("Receita", backref='medico', lazy=True)
+
+    # medico (one-to-many)
+    # uma consulta pode ser feita por apenas um medico
+    # um medico pode ter varias consultas    
+    consultas = db.relationship("Consulta", backref='medico', lazy=True)
 
     # impressao da classe
     def __repr__(self):

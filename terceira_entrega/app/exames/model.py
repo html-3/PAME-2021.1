@@ -13,7 +13,7 @@ from app.extensions import db
 class Exame(db.Model):
 
     # nome da tabela
-    __tablename__ = "exames"
+    #__tablename__ = "exames"
 
     # id de cada elemento da tabela
     id = db.Column(db.Integer, primary_key=True)
@@ -24,10 +24,10 @@ class Exame(db.Model):
     # tipo de exame
     tipo = db.Column(db.String(30), nullable=False)
 
-    # paciente (one-to-one)
+    # examens medicos (one-to-many)
+    # um exame pode ser de apenas um paciente
+    # um paciente pode ter varios exames
     paciente_id = db.Column(db.Integer, db.ForeignKey('paciente.id'))
-    # este nao aparece na db, apenas estabelece a relacao
-    paciente = db.relationship("Paciente", cascade="all, delete", backref="exames", lazy=True)
 
     # impressao da classe
     def __repr__(self):
