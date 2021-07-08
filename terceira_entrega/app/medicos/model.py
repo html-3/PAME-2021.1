@@ -13,6 +13,7 @@ class Medico(db.Model):
 
     # nome da tabela
     #__tablename__ = "médicos"
+    # estava causando problemas entao foi comentado
 
     # contatos da clinica (placeholder)
     # salvar em um lugar mais apropriado

@@ -3,17 +3,15 @@ from app.extensions import db
 # id = chave primaria
 # horario = hora e dia da consulta: (ano, mes, dia), obrigatoria, unica
 
-# paciente_id = id do paciente:
-# paciente = paciente (instancia):
-
-# medico_id = id do medico:
-# medico = medico (instancia):
+# pacientes = pacientes (relacionamento):
+# medicos = medicos (relacionamento):
 
 
 class Consulta(db.Model):
 
     # nome da tabela
     #__tablename__ = "consultas"
+    # estava causando problemas entao foi comentado
 
     # id de cada elemento da tabela
     id = db.Column(db.Integer, primary_key=True)

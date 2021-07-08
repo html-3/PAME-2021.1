@@ -1,14 +1,19 @@
-from flask import request, Blueprint
+from flask import request, Blueprint, flask
 from model import Medico
 from app.extensions import db
 
 # sufixo -I significa instanciacao
 
+# apenas foi um comeco, nada completo ou funcional
+
+# api para as funcoes do medico
 medico_api = Blueprint('medico_api', __name__)
+
 
 @medico_api.route('/medicos', methods=['POST'])
 def criar_medico():
     
+    # criar um novo medico
     if request.method == "POST":
         dados = request.json
         nomeI = dados.get("nome")
@@ -43,7 +48,7 @@ def criar_medico():
         db.session.add(medicoI)
         db.session.commit()
 
-        return medicoI.json(), 200
+        return flask.jsonify(medicoI), 200
 
     else:
         return {'error': 'metodo invalido'}, 405

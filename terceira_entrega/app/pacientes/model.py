@@ -13,6 +13,7 @@ class Paciente(db.Model):
 
     # nome da tabela
     #__tablename__ = "pacientes"
+    # estava causando problemas entao foi comentado
 
     # id de cada elemento da tabela
     id = db.Column(db.Integer, primary_key=True)
