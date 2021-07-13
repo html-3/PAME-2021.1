@@ -5,7 +5,7 @@ class Funcionario(db.Model):
 
     senha_base = "password123"
 
-    cargo = "Operador de Máquina"
+    cargo_base = "Operador de Máquina"
 
     id = db.Column(db.Integer, primary_key=True)
 
@@ -15,7 +15,7 @@ class Funcionario(db.Model):
 
     senha = db.Column(db.String(30), default=senha_base)
 
-    cargo = db.Column(db.String(30), default=cargo)
+    cargo = db.Column(db.String(30), default=cargo_base)
 
 
-    maquinas = db.relationship("Maquina", secondary=tabela_funcionario_maquina, lazy=True)
+    maquinas = db.relationship("Maquina", secondary=tabela_funcionario_maquina, backref='operadores', lazy=True)
