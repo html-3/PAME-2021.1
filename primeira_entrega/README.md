@@ -86,3 +86,6 @@ incluindo um ponto que poderíamos desenvolver para melhorar sua experiência
 
 Os ícones do Facebook que vocês precisarão utilizar, serão enviados para vocês e o prazo da entrega
 é para 17:00 do dia 29/06/2021.
+
+***
+> Boa tarde Henrique! Segue o feedback de sua primeira entrega: Parece que você conseguiu entender e aplicar todos os conceitos descritos durante as capacitações de HTML/CSS e git/github. O código estava muito bem organizado no github, e a tela em si foi muito bem feita, utilizando os conceitos de flexbox ensinados, e além disso com boa responsividade. Também percebemos a utilização de JavaScript, que não foi utilizado durante a capacitação, mostrando excedência. A única coisa que eu gostaria de pontuar seria que você esqueceu de colocar alguns ícones, mas de modo geral foi uma ótima entrega!
