@@ -1,3 +1,5 @@
 __pycache__
 data-dev.db
+data-dev.db-journal
 test.py
+sensive.py
