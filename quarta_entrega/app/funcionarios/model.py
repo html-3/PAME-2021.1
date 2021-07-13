@@ -4,7 +4,6 @@ from app.association import tabela_funcionario_maquina
 class Funcionario(db.Model):
 
     senha_base = "password123"
-
     cargo_base = "Operador de Máquina"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -19,3 +18,10 @@ class Funcionario(db.Model):
 
 
     maquinas = db.relationship("Maquina", secondary=tabela_funcionario_maquina, backref='operadores', lazy=True)
+
+    def json(self):
+        return {'nome': self.nome,
+                'registro': self.registro,
+                'senha': self.senha,
+                'cargo': self.cargo
+               }
