@@ -1,6 +1,12 @@
 from app.extensions import db
 from datetime import date
 
+# Maquina: 
+# - id: chave principal
+# - tipo: funcao/tipo de maquina, obrigatoria
+# - modelo: variante ou versao da maquina, obrigatoria
+# - implementacao: data do comeco de uso (questoes de manutencao periodica), default
+
 class Maquina(db.Model):
 
     data_base = date.today()

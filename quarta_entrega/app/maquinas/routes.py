@@ -2,6 +2,19 @@ from app.maquinas.controllers import MaquinasGeral
 from flask import Blueprint
 from app.maquinas.controllers import MaquinasGeral, MaquinasParticular, MaquinasOperadores
 
+# MaquinasGeral: 
+# - lista de maquinas 
+# - adicionar maquina
+# MaquinasParticular: 
+# - ver detalhes de uma maquina 
+# - reescrever detalhes de uma maquina 
+# - editar maquina 
+# - detelar maquina
+# MaquinasOperadores: 
+# - ver operadores de uma maquina 
+# - adicionar operador de uma maquina 
+# - remover operador
+
 maquinas_api = Blueprint('maquinas_api', __name__)
 
 maquinas_api.add_url_rule('/maquinas', 

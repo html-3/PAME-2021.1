@@ -1,6 +1,14 @@
 from app.extensions import db
 from app.association import tabela_funcionario_maquina
 
+# Funcionario: 
+# - id: chave principal
+# - nome: nome do funcionario, obrigatoria
+# - registro: nome de usuario, obrigatoria, unica
+# - senha, default
+# - cargo: papel na empresa, default
+
+
 class Funcionario(db.Model):
 
     senha_base = "password123"

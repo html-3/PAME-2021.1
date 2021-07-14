@@ -1,6 +1,15 @@
 from flask import Blueprint
 from app.funcionarios.controllers import FuncionariosGeral, FuncionariosParcicular
 
+# FuncionariosGeral: 
+# - lista de funcionarios 
+# - adicionar funcionario
+# FuncionariosParcicular: 
+# - ver detalhes de um funcionario 
+# - reescrever detalhes de um funcionario
+# - editar funcionario 
+# - detelar funcionario
+
 funcionarios_api = Blueprint('funcionarios_api', __name__)
 
 funcionarios_api.add_url_rule('/funcionarios', 
