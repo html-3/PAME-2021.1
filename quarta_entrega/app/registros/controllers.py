@@ -19,10 +19,13 @@ class RegistrosGeral(MethodView): # /registro
             dados = request.json
 
             try:
-                horario = datetime.strptime(dados.get('horario'), "%Y-%m-%d %H:00:00")
-                temperatura = float(dados.get('temperatura'))
-                peso_medio = float(dados.get('peso_medio'))
+                horario = datetime.strptime(dados.get('horario'), "%Y-%m-%d %H:%M:00")
+                temperatura = round(float(dados.get('temperatura')), 2)
+                peso_medio = round(float(dados.get('peso_medio')), 2)
                 maquina_id = int(dados.get('maquina_id'))
+
+                if not maquina_id or not isinstance(maquina_id, int):
+                    return {'error': 'maquina_id nao foi declarado ou invalido'}, 400
 
                 maquina = Maquina.query.get_or_404(maquina_id)
 
