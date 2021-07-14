@@ -23,12 +23,15 @@ def create_dd(app):
             db.session.commit()
 
         if not Maquina.query.first():
-            maq1 = Maquina(modelo="Pesadora Aplha Mega 2.0",
+            maq1 = Maquina(tipo="Pesadora",
+                           modelo="Aplha Mega 2.0",
                            implementacao=datetime(2020, 6, 1))
             
-            maq2 = Maquina(modelo="Distribuidora Beta 3")
+            maq2 = Maquina(tipo="Distribuidora",
+                           modelo="Beta 3")
 
-            maq3 = Maquina(modelo="Esteira Deluxe Premium",
+            maq3 = Maquina(tipo="Esteira",
+                           modelo="Deluxe Premium",
                            implementacao=datetime(2021, 7, 1))
 
             db.session.add(maq1)

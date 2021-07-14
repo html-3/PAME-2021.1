@@ -2,6 +2,7 @@ from flask import Flask
 from .extensions import db, migrate
 from .config import Config
 from .funcionarios.routes import funcionarios_api
+from .maquinas.routes import maquinas_api
 from dummy_data import create_dd
 
 def create_app():
@@ -16,5 +17,6 @@ def create_app():
     create_dd(app)
 
     app.register_blueprint(funcionarios_api)
+    app.register_blueprint(maquinas_api)
 
     return app
