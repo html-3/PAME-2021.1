@@ -4,6 +4,7 @@ from sqlalchemy import exc
 from app.extensions import db
 from app.registros.model import Registro
 from app.maquinas.model import Maquina
+from datetime import date, datetime
 
 class RegistrosGeral(MethodView): # /registro
 
@@ -18,10 +19,10 @@ class RegistrosGeral(MethodView): # /registro
             dados = request.json
 
             try:
-                horario = dados.get('horario')
+                horario = datetime.strptime(dados.get('horario'), "%Y-%m-%d %H:00:00")
                 temperatura = float(dados.get('temperatura'))
                 peso_medio = float(dados.get('peso_medio'))
-                maquina_id = int(dados.get('cargo'))
+                maquina_id = int(dados.get('maquina_id'))
 
                 maquina = Maquina.query.get_or_404(maquina_id)
 
