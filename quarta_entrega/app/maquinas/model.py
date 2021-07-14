@@ -19,6 +19,8 @@ class Maquina(db.Model):
 
     implementacao = db.Column(db.DateTime, default=data_base)
 
+    registros = db.relationship("Registro", backref='maquina', lazy=True)
+
     def json(self):
         return {'tipo': self.tipo,
                 'modelo': self.modelo,

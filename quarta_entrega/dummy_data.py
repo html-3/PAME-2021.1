@@ -1,6 +1,7 @@
 from app.extensions import db
 from app.funcionarios.model import Funcionario
 from app.maquinas.model import Maquina
+from app.registros.model import Registro
 from app.association import tabela_funcionario_maquina
 from datetime import datetime
 
@@ -43,5 +44,14 @@ def create_dd(app):
             maq2.operadores.append(pedro)
             maq1.operadores.append(lais)
 
+        if not Registro.query.first():
+            reg1 = Registro(horario=datetime(2020, 6, 1, 13),
+                            temperatura=53.12,
+                            peso_medio=20.34,
+                            maquina=maq1)
+            
+            db.session.add(reg1)
             db.session.commit()
+
+        db.session.commit()
                

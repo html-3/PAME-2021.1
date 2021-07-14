@@ -1,4 +1,3 @@
-from app.maquinas.controllers import MaquinasGeral
 from flask import Blueprint
 from app.maquinas.controllers import MaquinasGeral, MaquinasParticular, MaquinasOperadores
 
