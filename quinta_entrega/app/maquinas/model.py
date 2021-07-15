@@ -1,4 +1,5 @@
 from app.extensions import db
+from app.association import tabela_funcionario_maquina
 from datetime import date
 
 # Maquina: 
@@ -22,6 +23,8 @@ class Maquina(db.Model):
     modelo = db.Column(db.String(20), nullable=False)
 
     implementacao = db.Column(db.DateTime, default=data_base)
+
+    #operadores1 = db.relationship("Funcionario", secondary=tabela_funcionario_maquina, backref='maquinas1', lazy=True)
 
     pesos_medidos = db.relationship("Peso", backref='maquina', lazy=True)
 

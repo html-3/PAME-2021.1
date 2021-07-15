@@ -1,14 +1,17 @@
+from re import I
 from app.funcionarios.model import Funcionario
 from flask import jsonify
 from app.extensions import db
 from app.maquinas.model import Maquina
 from datetime import datetime
 from sqlalchemy import exc
+from app.association import tabela_funcionario_maquina
 
 # listar maquinas
-def maquinas():
-    maquinas = Maquina.query.all()
+def maquinas(id_usuario):
+    maquinas = Funcionario.query.filter_by(id=id_usuario).maquinas1
 
+    print(maquinas)
     return jsonify([maquina.json() for maquina in maquinas]), 200
 
 # mostrar maquina
@@ -18,7 +21,7 @@ def maquinas():
 def maquina_utilidades(dados, id_escolhido, metodo):
     if not isinstance(id_escolhido, int):
         return {'error': 'id_escolhido inválido'}, 400
-        
+    
     if metodo in ["GET", "PATCH", "DELETE"]:
         maquina = Maquina.query.get_or_404(id_escolhido)
 

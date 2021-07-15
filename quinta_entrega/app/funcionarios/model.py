@@ -13,6 +13,7 @@ import bcrypt
 
 class Funcionario(db.Model):
 
+    senha_base = "password123"
     senha_base_hash = bcrypt.hashpw("password123".encode(), bcrypt.gensalt())
     cargo_base = "Operador de Máquina"
     adm_base = False

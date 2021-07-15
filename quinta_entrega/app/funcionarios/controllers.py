@@ -34,13 +34,15 @@ class FuncionariosParcicular(MethodView): # /funcionario/<int:id_escolhido>
     decorators = [jwt_required()]
 
     def get(self, id_escolhido):
-        if get_jwt_identity() != id_escolhido:
+        usuario = Funcionario.query.filter_by(id=get_jwt_identity()).first()
+        if get_jwt_identity() != id_escolhido or usuario.adm != True:
             return {'erro': 'acesso negado'}, 400
 
         return funcionario_utilidades(0, id_escolhido, "GET")
 
     def patch(self, id_escolhido):
-        if get_jwt_identity() != id_escolhido:
+        usuario = Funcionario.query.filter_by(id=get_jwt_identity()).first()
+        if get_jwt_identity() != id_escolhido or usuario.adm != True:
             return {'erro': 'acesso negado'}, 400
 
         dados = request.json
@@ -48,7 +50,8 @@ class FuncionariosParcicular(MethodView): # /funcionario/<int:id_escolhido>
     
 
     def delete(self, id_escolhido):
-        if get_jwt_identity() != id_escolhido:
+        usuario = Funcionario.query.filter_by(id=get_jwt_identity()).first()
+        if get_jwt_identity() != id_escolhido or usuario.adm != True:
             return {'erro': 'acesso negado'}, 400
 
         return funcionario_utilidades(0, id_escolhido, "DELETE")

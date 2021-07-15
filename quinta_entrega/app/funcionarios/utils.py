@@ -1,9 +1,16 @@
-from flask import jsonify
+from flask import jsonify, render_template
 from app.extensions import db
 from app.funcionarios.model import Funcionario
 from sqlalchemy import exc
 from flask_jwt_extended import create_access_token
 import bcrypt
+from flask_mail import Message
+
+def email_login(funcionario):
+    msg = Message(sender='email@poli.ufrj.br',
+                  recipients=[funcionario.email],
+                  subject='Login efetuado!',
+                  html=render_template('email.html', nome=funcionario.nome, email=funcionario.email, cargo=funcionario.cargo))
 
 def login(dados):
     try:
@@ -37,7 +44,6 @@ def login(dados):
 
     except:
         return {'error': 'ocorreu um erro'}, 400
-
 
 def funcionarios():
     funcionarios = Funcionario.query.all()
@@ -113,6 +119,8 @@ def funcionario_utilidades(dados, id_escolhido, metodo):
                                       cargo=cargo,
                                       adm=adm)
             db.session.add(funcionario)
+
+            email_login(funcionario)
 
         if metodo == "PATCH":
             funcionario.nome = nome

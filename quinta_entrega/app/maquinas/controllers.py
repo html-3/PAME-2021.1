@@ -1,16 +1,26 @@
 from flask import request
 from flask.views import MethodView
 from app.maquinas.utils import maquinas, maquina_utilidades
+from app.funcionarios.model import Funcionario
 from flask_jwt_extended import jwt_required, get_jwt_identity
+
 
 class MaquinasGeral(MethodView): # /maquinas
     decorators = [jwt_required()]
 
     def get(self):
-        return maquinas()
+        id_usuario = get_jwt_identity()
+        usuario = Funcionario.query.filter_by(id=id_usuario).first()
+        if usuario.adm != True:
+            return {'erro': 'acesso negado'}, 400
+        return maquinas(id_usuario)
 
 
     def post(self):
+        id_usuario = get_jwt_identity()
+        usuario = Funcionario.query.filter_by(id=id_usuario).first()
+        if usuario.adm != True:
+            return {'erro': 'acesso negado'}, 400
         dados = request.json
         return maquina_utilidades(dados, 0, "POST")
 
