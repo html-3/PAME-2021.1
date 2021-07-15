@@ -46,7 +46,7 @@ class Peso(db.Model):
 
     bolsa_id = db.Column(db.String(12), nullable=False, unique=True)
 
-    peso = db.Column(db.Float, nullable=False)
+    peso_kg = db.Column(db.Float, nullable=False)
 
     maquina_id = db.Column(db.Integer, db.ForeignKey('maquina.id'))
 

@@ -1,5 +1,6 @@
+from app.maquinas.model import Maquina
 from app.extensions import db
-from app.registros.model import Temperatura
+from app.registros.model import Temperatura, Peso
 from datetime import datetime
 from sqlalchemy import exc
 
@@ -63,9 +64,6 @@ def temperatura_utilidades(dados, id_escolhido, metodo):
                                       temp5=temp5)
             db.session.add(temperatura)
 
-        if metodo == "POST":
-            db.session.add(temperatura)
-
         if metodo == "PATCH":
             temperatura.horario = horario
             temperatura.temp1 = temp1
@@ -77,11 +75,11 @@ def temperatura_utilidades(dados, id_escolhido, metodo):
         db.session.commit()
 
     except ValueError:
-        if not temp1 == float or\
-           not temp2 == float or\
-           not temp3 == float or\
-           not temp4 == float or\
-           not temp5 == float:
+        if not isinstance(temp1 , float) or\
+           not isinstance(temp2 , float) or\
+           not isinstance(temp3 , float) or\
+           not isinstance(temp4 , float) or\
+           not isinstance(temp5 , float):
             return {'error': 'temperatura não é float'}, 400
         
         else:
@@ -96,3 +94,77 @@ def temperatura_utilidades(dados, id_escolhido, metodo):
 
     return temperatura.json(), 200
 
+# utilidades peso
+def pesos():
+    return Temperatura.query.all()
+
+def peso_utilidades(dados, id_escolhido, metodo):
+    if not isinstance(id_escolhido, int):
+        return {'error': 'id_escolhido inválido'}, 400
+        
+    if metodo in ["GET", "PATCH", "DELETE"]:
+        peso = Peso.query.get_or_404(id_escolhido)
+
+    if metodo == "GET":
+        return peso.json(), 200
+
+    if metodo == "DELETE":
+        db.session.delete(peso)
+        db.session.commit()
+        
+        return peso.json(), 200
+
+    try:
+        if metodo == "PATCH":
+            bolsa_id = dados.get('bolsa_id', peso.bolsa_id)
+            peso_kg = dados.get('peso_kg', peso.peso_kg)
+            maquina_id = dados.get('maquina_id', peso.maquina_id)
+
+        elif metodo == "POST":
+            bolsa_id = dados.get('bolsa_id')
+            peso_kg = dados.get('peso_kg')
+            maquina_id = dados.get('maquina_id')
+
+        if bolsa_id == None or\
+           peso_kg == None or\
+           maquina_id == None:
+            return {'error': 'faltou algum dado'}, 400
+
+        bolsa_id = int(bolsa_id)
+        peso_kg = round(float(peso_kg), 2)
+        maquina_id = int(maquina_id)
+
+        if metodo == "POST":
+            maquina = Maquina.query.get_or_404(maquina_id)
+
+            peso = Peso(bolsa_id=bolsa_id,
+                        peso_kg=peso_kg,
+                        maquina=maquina)
+            db.session.add(peso)
+
+        if metodo == "PATCH":
+            maquina = Maquina.query.get_or_404(maquina_id)
+
+            peso.bolsa_id = bolsa_id
+            peso.peso_kg = peso_kg
+            peso.maquina = maquina
+
+        db.session.commit()
+
+    except ValueError:
+        """
+        if not isinstance(bolsa_id , int) or\
+           not isinstance(peso_kg, float) or\
+           not isinstance(maquina_id, int):
+        """
+
+        return {'error': 'tipo invalido de bolsa_id, peso_kg ou maquina_id'}, 400
+
+    except exc.IntegrityError:
+        db.session.rollback()
+        return {'error': 'integridade do banco de dados comprometida'}, 400
+
+    except:
+        return {'error': 'ocorreu um erro'}, 400
+
+    return peso.json(), 200
