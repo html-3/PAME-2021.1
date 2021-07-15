@@ -31,13 +31,14 @@ def maquina_utilidades(dados, id_escolhido, metodo):
         if metodo == "PATCH":
             tipo = dados.get('tipo', maquina.tipo)
             modelo = dados.get('modelo', maquina.modelo)
-            implementacao = dados.get('implementacao', maquina.implementacao)
+            implementacao = dados.get('implementacao', maquina.implementacao.strftime("%Y-%m-%d"))
+            operadores = dados.get('operadores', maquina.operadores_base)
 
         elif metodo == "POST":
             tipo = dados.get('tipo')
             modelo = dados.get('modelo')
-            implementacao = dados.get('implementacao', maquina.data_base)
-            operadores = dados.get('operadores',maquina.operadores_base)
+            implementacao = dados.get('implementacao', Maquina.data_base)
+            operadores = dados.get('operadores', Maquina.operadores_base)
 
         if tipo == None or\
            modelo == None or\
@@ -69,8 +70,8 @@ def maquina_utilidades(dados, id_escolhido, metodo):
 
         db.session.commit()
 
-    except TypeError:
-        return {'error': 'operadores tem que ser uma lista'}, 400
+    #except TypeError:
+    #    return {'error': 'operadores tem que ser uma lista'}, 400
 
     except ValueError:
         if not isinstance(implementacao, datetime):
@@ -82,7 +83,7 @@ def maquina_utilidades(dados, id_escolhido, metodo):
         db.session.rollback()
         return {'error': 'banco de dados comprometido'}, 400
 
-    except:
-        return {'error': 'ocorreu um erro'}, 400
+    #except:
+    #    return {'error': 'ocorreu um erro'}, 400
 
     return maquina.json(), 200
