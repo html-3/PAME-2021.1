@@ -8,14 +8,14 @@ import bcrypt
 # - email: nome de usuario, obrigatoria, unica
 # - senha, default
 # - cargo: papel na empresa, default
+# - adm: poderes de administrador ou moderacao, default
 
 
 class Funcionario(db.Model):
 
-    senha_base = "password123"
     senha_base_hash = bcrypt.hashpw("password123".encode(), bcrypt.gensalt())
-
     cargo_base = "Operador de Máquina"
+    adm_base = False
 
     id = db.Column(db.Integer, primary_key=True)
 
@@ -27,6 +27,7 @@ class Funcionario(db.Model):
 
     cargo = db.Column(db.String(30), default=cargo_base)
 
+    adm = db.Column(db.Boolean, default=adm_base)
 
     maquinas = db.relationship("Maquina", secondary=tabela_funcionario_maquina, backref='operadores', lazy=True)
 

@@ -1,5 +1,5 @@
 from flask import Flask
-from .extensions import db, migrate
+from .extensions import db, migrate, mail, jwt
 from .config import Config
 from .funcionarios.routes import funcionarios_api
 from .maquinas.routes import maquinas_api
@@ -14,6 +14,8 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
+    
+    jwt.init_app(app)
 
     create_dd(app)
 

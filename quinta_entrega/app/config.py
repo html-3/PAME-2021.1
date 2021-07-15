@@ -1,7 +1,16 @@
-class Config():
+from app.sensive import Sensive
+
+class Config(Sensive):
     DEBUG = True
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///data-dev.db"
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = Sensive.SQLALCHEMY_DATABASE_URI
+    SQLALCHEMY_TRACK_MODIFICATIONS = Sensive.SQLALCHEMY_TRACK_MODIFICATIONS
+    JSON_SORT_KEYS = Sensive.JSON_SORT_KEYS
 
-    JSON_SORT_KEYS = False
+    MAIL_SERVER  = Sensive.MAIL_SERVER
+    MAIL_PORT  = Sensive.MAIL_PORT
+    MAIL_USERNAME = Sensive. MAIL_USERNAME
+    MAIL_PASSWORD = Sensive. MAIL_PASSWORD
+    MAIL_USE_TLS = Sensive. MAIL_USE_TLS
+    MAIL_USE_SSL = Sensive. MAIL_USE_SSL
+    JWT_SECRET_KEY = Sensive. JWT_SECRET_KEY

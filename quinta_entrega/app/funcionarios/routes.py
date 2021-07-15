@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.funcionarios.controllers import FuncionariosGeral, FuncionariosParcicular
+from app.funcionarios.controllers import FuncionariosGeral, FuncionariosParcicular, FuncionariosLogin
 
 # FuncionariosGeral: 
 # - lista de funcionarios 
@@ -11,6 +11,10 @@ from app.funcionarios.controllers import FuncionariosGeral, FuncionariosParcicul
 # - detelar funcionario
 
 funcionarios_api = Blueprint('funcionarios_api', __name__)
+
+funcionarios_api.add_url_rule('/login', 
+        view_func=FuncionariosLogin.as_view('funcionarios_login'), 
+        methods=['POST'])
 
 funcionarios_api.add_url_rule('/funcionarios', 
         view_func=FuncionariosGeral.as_view('funcionarios_geral'), 

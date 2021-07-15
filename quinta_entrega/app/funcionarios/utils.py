@@ -2,9 +2,43 @@ from flask import jsonify
 from app.extensions import db
 from app.funcionarios.model import Funcionario
 from sqlalchemy import exc
+from flask_jwt_extended import create_access_token
 import bcrypt
 
-# utilidades peso
+def login(dados):
+    try:
+        email = dados.get('email')
+        senha = dados.get('senha')
+        
+        if email == None or senha == None:
+            return {'error': 'faltou algum dado'}, 400
+
+        email = str(email)[0:30]
+        senha = str(senha)[0:50]
+
+        usuario = Funcionario.query.filter_by(email=email).first()
+
+        if not usuario or not bcrypt.checkpw(senha.encode(), usuario.senha_hash):
+            return {'error': 'email ou senha inválido'}, 400
+
+        else:
+            token_acesso = create_access_token(identity=usuario.id)
+            return {'token': token_acesso}, 200
+
+    except TypeError:
+        return {'error': 'tipo inválido de nome, email, senha ou cargo'}, 400
+
+    except ValueError:
+        return {'error': 'tipo inválido de nome, email, senha ou cargo'}, 400
+        
+    except exc.IntegrityError:
+        db.session.rollback()
+        return {'error': 'banco de dados comprometido'}, 400
+
+    except:
+        return {'error': 'ocorreu um erro'}, 400
+
+
 def funcionarios():
     funcionarios = Funcionario.query.all()
 
@@ -32,17 +66,20 @@ def funcionario_utilidades(dados, id_escolhido, metodo):
             email = dados.get('email', funcionario.email)
             senha = dados.get('senha', Funcionario.senha_base)
             cargo = dados.get('cargo', funcionario.cargo)
+            adm = dados.get('adm', funcionario.adm)
 
         elif metodo == "POST":
             nome = dados.get('nome')
             email = dados.get('email')
             senha = dados.get('senha', Funcionario.senha_base)
             cargo = dados.get('cargo', Funcionario.cargo_base)
+            adm = dados.get('adm', Funcionario.adm_base)
 
         if nome == None or\
            email == None or\
            senha == None or\
-           cargo == None:
+           cargo == None or\
+           adm == None:
             return {'error': 'faltou algum dado'}, 400
 
         if not isinstance(nome , str) or\
@@ -50,6 +87,9 @@ def funcionario_utilidades(dados, id_escolhido, metodo):
            not isinstance(senha , str) or\
            not isinstance(cargo , str):
            return {'error': 'dados devem ser string'}, 400
+
+        if not isinstance(adm, bool):
+            return {'error': 'cargo adm inválido'}, 400
 
         if senha == Funcionario.senha_base and metodo == "PATCH":
             senha_hash = funcionario.senha_hash
@@ -59,7 +99,7 @@ def funcionario_utilidades(dados, id_escolhido, metodo):
 
         nome = str(nome)[0:30]
         email = str(email)[0:30]
-        senha = str(senha)[0:50]
+        senha_hash = str(senha_hash)[0:100]
         cargo = str(cargo)[0:30]
 
         if metodo == "POST":
@@ -69,15 +109,17 @@ def funcionario_utilidades(dados, id_escolhido, metodo):
 
             funcionario = Funcionario(nome=nome,
                                       email=email,
-                                      senha=senha,
-                                      cargo=cargo)
+                                      senha_hash=senha_hash,
+                                      cargo=cargo,
+                                      adm=adm)
             db.session.add(funcionario)
 
         if metodo == "PATCH":
             funcionario.nome = nome
             funcionario.email = email
-            funcionario.senha = senha
+            funcionario.senha_hash = senha_hash
             funcionario.cargo = cargo
+            funcionario.adm = adm
 
         db.session.commit()
 

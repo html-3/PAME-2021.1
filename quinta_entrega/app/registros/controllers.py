@@ -1,8 +1,10 @@
 from flask import request
 from flask.views import MethodView
 from app.registros.utils import temperaturas, temperatura_utilidades, pesos, peso_utilidades
+from flask_jwt_extended import jwt_required
 
 class TemperaturaGeral(MethodView): # /temperaturas
+    decorators = [jwt_required()]
 
     def get(self):
         return temperaturas()
@@ -12,6 +14,7 @@ class TemperaturaGeral(MethodView): # /temperaturas
         return temperatura_utilidades(dados, 0, "POST")
 
 class TemperaturaParticular(MethodView): # /temperatura/<int:id_escolhido>
+    decorators = [jwt_required()]
 
     def get(self, id_escolhido):
         return temperatura_utilidades(0, id_escolhido, "GET")
@@ -25,6 +28,7 @@ class TemperaturaParticular(MethodView): # /temperatura/<int:id_escolhido>
 
 
 class PesoGeral(MethodView): # /pesos
+    decorators = [jwt_required()]
 
     def get(self):
         return pesos()
@@ -34,6 +38,7 @@ class PesoGeral(MethodView): # /pesos
         return peso_utilidades(dados, 0, "POST")
 
 class PesoParticular(MethodView): # /peso/<int:id_escolhido>
+    decorators = [jwt_required()]
 
     def get(self, id_escolhido):
         return peso_utilidades(0, id_escolhido, "GET")

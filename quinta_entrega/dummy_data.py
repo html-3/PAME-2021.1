@@ -23,7 +23,8 @@ def create_dd(app):
             lais = Funcionario(nome="Lais Quintas",
                                 email="lais.quintas1@gmail.com",
                                 cargo="Gerente",
-                                senha_hash=bcrypt.hashpw("senha789".encode(), bcrypt.gensalt()))
+                                senha_hash=bcrypt.hashpw("senha789".encode(), bcrypt.gensalt()),
+                                adm=True)
 
             db.session.add(pedro)
             db.session.add(lais)
