@@ -135,9 +135,12 @@ def peso_utilidades(dados, id_escolhido, metodo):
            maquina_id == None:
             return {'error': 'faltou algum dado'}, 400
 
-        bolsa_id = int(bolsa_id)
+        bolsa_id = str(bolsa_id)[0:12]
         peso_kg = round(float(peso_kg), 2)
         maquina_id = int(maquina_id)
+
+        if len(bolsa_id) < 12:
+            return {'error': 'tipo inválido de bolsa_id'}
 
         if metodo == "POST":
             maquina = Maquina.query.get_or_404(maquina_id)
@@ -163,13 +166,15 @@ def peso_utilidades(dados, id_escolhido, metodo):
            not isinstance(maquina_id, int):
         """
 
-        return {'error': 'tipo invalido de bolsa_id, peso_kg ou maquina_id'}, 400
+        return {'error': 'tipo inválido de bolsa_id, peso_kg ou maquina_id'}, 400
 
     except exc.IntegrityError:
         db.session.rollback()
-        return {'error': 'integridade do banco de dados comprometida'}, 400
+        return {'error': 'bolsa_id inválido'}, 400
 
+
+    """
     except:
-        return {'error': 'ocorreu um erro'}, 400
+        return {'error': 'ocorreu um erro'}, 400"""
 
     return peso.json(), 200

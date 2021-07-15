@@ -52,6 +52,6 @@ class Peso(db.Model):
 
     def json(self):
         return {'bolsa_id': self.bolsa_id,
-                'peso': self.peso,
+                'peso_kg': self.peso_kg,
                 'maquina_id': self.maquina_id
                }
