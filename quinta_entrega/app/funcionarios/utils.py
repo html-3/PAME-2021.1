@@ -6,11 +6,11 @@ from flask_jwt_extended import create_access_token
 import bcrypt
 from flask_mail import Message
 
-def email_login(funcionario):
-    msg = Message(sender='email@poli.ufrj.br',
-                  recipients=[funcionario.email],
+def email_login(nome, email, cargo):
+    msg = Message(sender='email@email.com',
+                  recipients=[email],
                   subject='Login efetuado!',
-                  html=render_template('email.html', nome=funcionario.nome, email=funcionario.email, cargo=funcionario.cargo))
+                  html=render_template('email.html', nome=nome, email=email, cargo=cargo))
 
 def login(dados):
     try:
@@ -120,7 +120,7 @@ def funcionario_utilidades(dados, id_escolhido, metodo):
                                       adm=adm)
             db.session.add(funcionario)
 
-            email_login(funcionario)
+            email_login(nome, email, cargo)
 
         if metodo == "PATCH":
             funcionario.nome = nome
