@@ -32,7 +32,7 @@ class Temperatura(db.Model):
     temp5 = db.Column(db.Float, nullable=False)
 
     def json(self):
-        return {'horario': self.horario,
+        return {'horario': self.horario.strftime("%Y-%m-%d %H:%M:%S"),
                 'temp1': self.temp1,
                 'temp2': self.temp2,
                 'temp3': self.temp3,
