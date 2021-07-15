@@ -1,10 +1,11 @@
 from app.extensions import db
 from app.association import tabela_funcionario_maquina
+import bcrypt
 
 # Funcionario: 
 # - id: chave principal
 # - nome: nome do funcionario, obrigatoria
-# - registro: nome de usuario, obrigatoria, unica
+# - email: nome de usuario, obrigatoria, unica
 # - senha, default
 # - cargo: papel na empresa, default
 
@@ -12,15 +13,17 @@ from app.association import tabela_funcionario_maquina
 class Funcionario(db.Model):
 
     senha_base = "password123"
+    senha_base_hash = bcrypt.hashpw("password123".encode(), bcrypt.gensalt())
+
     cargo_base = "Operador de Máquina"
 
     id = db.Column(db.Integer, primary_key=True)
 
     nome = db.Column(db.String(30), nullable=False)
 
-    registro = db.Column(db.String(30), nullable=False, unique=True)
+    email = db.Column(db.String(30), nullable=False, unique=True)
 
-    senha = db.Column(db.String(30), default=senha_base)
+    senha_hash = db.Column(db.String(100), default=senha_base_hash)
 
     cargo = db.Column(db.String(30), default=cargo_base)
 
@@ -29,7 +32,6 @@ class Funcionario(db.Model):
 
     def json(self):
         return {'nome': self.nome,
-                'registro': self.registro,
-                'senha': self.senha,
+                'email': self.email,
                 'cargo': self.cargo
                }

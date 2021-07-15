@@ -18,4 +18,4 @@ funcionarios_api.add_url_rule('/funcionarios',
 
 funcionarios_api.add_url_rule('/funcionario/<int:id_escolhido>', 
         view_func=FuncionariosParcicular.as_view('funcionarios_particular'), 
-        methods=['GET', 'PUT', 'PATCH', 'DELETE'])
+        methods=['GET', 'PATCH', 'DELETE'])

@@ -5,12 +5,16 @@ from app.maquinas.model import Maquina
 from datetime import datetime
 from sqlalchemy import exc
 
-# utilidades peso
+# listar maquinas
 def maquinas():
     maquinas = Maquina.query.all()
 
     return jsonify([maquina.json() for maquina in maquinas]), 200
 
+# mostrar maquina
+# adicionar maquina
+# editar maquina
+# deletar maquina
 def maquina_utilidades(dados, id_escolhido, metodo):
     if not isinstance(id_escolhido, int):
         return {'error': 'id_escolhido inválido'}, 400
@@ -70,8 +74,8 @@ def maquina_utilidades(dados, id_escolhido, metodo):
 
         db.session.commit()
 
-    #except TypeError:
-    #    return {'error': 'operadores tem que ser uma lista'}, 400
+    except TypeError:
+        return {'error': 'operadores tem que ser uma lista'}, 400
 
     except ValueError:
         if not isinstance(implementacao, datetime):
@@ -83,7 +87,7 @@ def maquina_utilidades(dados, id_escolhido, metodo):
         db.session.rollback()
         return {'error': 'banco de dados comprometido'}, 400
 
-    #except:
-    #    return {'error': 'ocorreu um erro'}, 400
+    except:
+        return {'error': 'ocorreu um erro'}, 400
 
     return maquina.json(), 200

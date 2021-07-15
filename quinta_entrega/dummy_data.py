@@ -4,6 +4,7 @@ from app.maquinas.model import Maquina
 from app.registros.model import Temperatura, Peso
 from app.association import tabela_funcionario_maquina
 from datetime import datetime
+import bcrypt
 
 def create_dd(app):
     with app.app_context():
@@ -12,17 +13,17 @@ def create_dd(app):
 
         if not Funcionario.query.first():
             pedro = Funcionario(nome="Pedro Rocha",
-                                registro="pedro.rocha1980@gmail.com",
-                                senha="senha456")
+                                email="pedro.rocha1980@gmail.com",
+                                senha_hash=bcrypt.hashpw("senha456".encode(), bcrypt.gensalt()))
             
             will = Funcionario(nome="William Carvalho",
-                                registro="william.carvalho@gmail.com",
+                                email="william.carvalho@gmail.com",
                                 cargo="Estagiário")
             
             lais = Funcionario(nome="Lais Quintas",
-                                registro="lais.quintas1@gmail.com",
+                                email="lais.quintas1@gmail.com",
                                 cargo="Gerente",
-                                senha="senha789")
+                                senha_hash=bcrypt.hashpw("senha789".encode(), bcrypt.gensalt()))
 
             db.session.add(pedro)
             db.session.add(lais)

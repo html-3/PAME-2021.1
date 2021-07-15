@@ -1,11 +1,6 @@
-from flask import request, jsonify
+from flask import request
 from flask.views import MethodView
 from app.maquinas.utils import maquinas, maquina_utilidades
-from sqlalchemy import exc
-from app.extensions import db
-from app.maquinas.model import Maquina
-from app.funcionarios.model import Funcionario
-from datetime import date, datetime
 
 class MaquinasGeral(MethodView): # /maquinas
 
