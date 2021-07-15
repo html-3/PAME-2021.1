@@ -4,66 +4,47 @@ from sqlalchemy import exc
 from app.extensions import db
 from app.registros.model import Registro
 from app.maquinas.model import Maquina
+from app.registros.utils import temperaturas, temperatura_utilidades, pesos, peso_utilidades
 
-class RegistrosGeral(MethodView): # /registro
+class TemperaturaGeral(MethodView): # /temperaturas
 
     def get(self):
-        registros = Registro.query.all()
-        
-        return jsonify([registro.json() for registro in registros]), 200
-
+        temperaturas()
 
     def post(self):
-        if True:
-            dados = request.json
-
-            try:
-                horario = dados.get('horario')
-                temperatura = float(dados.get('temperatura'))
-                peso_medio = float(dados.get('peso_medio'))
-                maquina_id = int(dados.get('cargo'))
-
-                maquina = Maquina.query.get_or_404(maquina_id)
-
-                registro = Registro(horario=horario,
-                                    temperatura=temperatura,
-                                    peso_medio=peso_medio,
-                                    maquina=maquina)
-
-                db.session.add(registro)
-                db.session.commit()
-
-            # com a funcao str(), obriga o input ser uma string, ou convertivel para uma string
-            except ValueError:
-                return {'error': 'tipo invalido'}, 400
-
-            # erro de integridade
-            except exc.IntegrityError:
-                db.session.rollback()
-                return {'error': 'erro de integridade'}, 400
-
-            # pegar oustros erros quaisquer (nunca disparou mas nunca se sabe)
-            except:
-                return {'error': 'ocorreu um erro'}, 400
-            
-        return registro.json(), 200
-
-
-    def delete(self):
         dados = request.json
+        temperatura_utilidades(dados, None, "POST")
 
-        id_registro = dados.get('id_registro')
+class TemperaturaParticular(MethodView): # /temperatura/<int:id_escolhido>
 
-        if not id_registro or not isinstance(id_registro, int):
-            return {'error': 'id_registro nao foi declarado ou invalido'}, 400
+    def get(self, id_escolhido):
+        temperatura_utilidades(None, id_escolhido, "GET")
 
-        registro = Registro.query.get_or_404(id_registro)
-        try:
-            db.session.delete(registro)
+    def patch(self, id_escolhido):
+        dados = request.json
+        temperatura_utilidades(dados, id_escolhido, "PATCH")
 
-            db.session.commit()
+    def delete(self, id_escolhido):
+        temperatura_utilidades(None, id_escolhido, "DELETE")
 
-        except:
-            return {'error': 'registro nao existe'}, 400
 
-        return registro.json(), 200
+class PesoGeral(MethodView): # /pesos
+
+    def get(self):
+        pesos()
+
+    def post(self):
+        dados = request.json
+        peso_utilidades(dados, None, "POST")
+
+class PesoParticular(MethodView): # /peso/<int:id_escolhido>
+
+    def get(self, id_escolhido):
+        peso_utilidades(None, id_escolhido, "GET")
+
+    def patch(self, id_escolhido):
+        dados = request.json
+        peso_utilidades(dados, id_escolhido, "PATCH")
+
+    def delete(self, id_escolhido):
+        peso_utilidades(None, id_escolhido, "DELETE")

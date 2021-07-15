@@ -1,3 +1,4 @@
+from flask import jsonify
 from app.maquinas.model import Maquina
 from app.extensions import db
 from app.registros.model import Temperatura, Peso
@@ -6,7 +7,9 @@ from sqlalchemy import exc
 
 # utilidades temperatura
 def temperaturas():
-    return Temperatura.query.all()
+    temperaturas = Temperatura.query.all()
+
+    return jsonify([temperatura.json() for temperatura in temperaturas]), 200
 
 def temperatura_utilidades(dados, id_escolhido, metodo):
     if not isinstance(id_escolhido, int):
@@ -96,7 +99,9 @@ def temperatura_utilidades(dados, id_escolhido, metodo):
 
 # utilidades peso
 def pesos():
-    return Temperatura.query.all()
+    pesos = Peso.query.all()
+
+    return jsonify([peso.json() for peso in pesos]), 200
 
 def peso_utilidades(dados, id_escolhido, metodo):
     if not isinstance(id_escolhido, int):
