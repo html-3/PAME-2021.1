@@ -5,12 +5,16 @@ from app.registros.model import Temperatura, Peso
 from datetime import datetime
 from sqlalchemy import exc
 
-# utilidades temperatura
+# aqui as funcionalidades dos metodos e outras funcoes sao definidas
+# tambem sao feitos os testes de validacao dos dados, para enviar os erros ao front
+
+# funcao para listar todas as temperaturas registradas
 def temperaturas():
     temperaturas = Temperatura.query.all()
 
     return jsonify([temperatura.json() for temperatura in temperaturas]), 200
 
+# funcao composta para ver, adicionar, editar e deletar temperaturas registradas
 def temperatura_utilidades(dados, id_escolhido, metodo):
     if not isinstance(id_escolhido, int):
         return {'error': 'id_escolhido inválido'}, 400
@@ -97,12 +101,13 @@ def temperatura_utilidades(dados, id_escolhido, metodo):
 
     return temperatura.json(), 200
 
-# utilidades peso
+# funcao para listar todos os pesos registradas
 def pesos():
     pesos = Peso.query.all()
 
     return jsonify([peso.json() for peso in pesos]), 200
 
+# funcao composta para ver, adicionar, editar e deletar pesos registrados
 def peso_utilidades(dados, id_escolhido, metodo):
     if not isinstance(id_escolhido, int):
         return {'error': 'id_escolhido inválido'}, 400

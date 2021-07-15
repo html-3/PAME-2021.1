@@ -1,4 +1,3 @@
-from re import I
 from app.funcionarios.model import Funcionario
 from flask import jsonify
 from app.extensions import db
@@ -7,17 +6,17 @@ from datetime import datetime
 from sqlalchemy import exc
 from app.association import tabela_funcionario_maquina
 
-# listar maquinas
+# aqui as funcionalidades dos metodos e outras funcoes sao definidas
+# tambem sao feitos os testes de validacao dos dados, para enviar os erros ao front
+
+# funcao para listar todas as maquinas
 def maquinas(id_usuario):
     maquinas = Funcionario.query.filter_by(id=id_usuario).maquinas1
 
     print(maquinas)
     return jsonify([maquina.json() for maquina in maquinas]), 200
 
-# mostrar maquina
-# adicionar maquina
-# editar maquina
-# deletar maquina
+# funcao composta para ver, adicionar, editar e deletar maquinas
 def maquina_utilidades(dados, id_escolhido, metodo):
     if not isinstance(id_escolhido, int):
         return {'error': 'id_escolhido inválido'}, 400

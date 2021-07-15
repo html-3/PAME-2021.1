@@ -2,7 +2,7 @@ from flask import Blueprint
 from app.maquinas.controllers import MaquinasGeral, MaquinasParticular
 
 # MaquinasGeral: 
-# - vwe lista de maquinas 
+# - ver lista de maquinas 
 # - adicionar maquina
 # MaquinasParticular: 
 # - ver detalhes de uma maquina 

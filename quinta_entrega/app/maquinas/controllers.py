@@ -4,6 +4,7 @@ from app.maquinas.utils import maquinas, maquina_utilidades
 from app.funcionarios.model import Funcionario
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
+# aqui as autorizacoes sao avaliadas e as funcoes de cada metodo sao chamadas
 
 class MaquinasGeral(MethodView): # /maquinas
     decorators = [jwt_required()]

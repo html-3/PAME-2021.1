@@ -1,6 +1,21 @@
 from flask import Blueprint
 from app.registros.controllers import TemperaturaGeral, TemperaturaParticular, PesoGeral, PesoParticular
 
+# TemperaturaGeral: 
+# - ver lista de temperaturas registradas 
+# - adicionar temperatura
+# TemperaturaParticular: 
+# - ver detalhes de uma temperaturas registradas 
+# - editar temperaturas registradas 
+# - detelar temperaturas registradas
+# PesoGeral: 
+# - ver lista de pesos registradas 
+# - adicionar peso
+# PesoParticular: 
+# - ver detalhes de uma pesos registradas 
+# - editar pesos registradas 
+# - detelar pesos registradas
+
 registros_api = Blueprint('registros_api', __name__)
 
 registros_api.add_url_rule('/temperaturas', 

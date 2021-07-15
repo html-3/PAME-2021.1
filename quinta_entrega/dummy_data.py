@@ -6,6 +6,8 @@ from app.association import tabela_funcionario_maquina
 from datetime import datetime
 import bcrypt
 
+#
+
 def create_dd(app):
     with app.app_context():
         db.create_all()
@@ -70,19 +72,19 @@ def create_dd(app):
             db.session.commit()
 
         if not Temperatura.query.first():
-            db.session.add(Temperatura(horario=datetime(2020, 6, 1, 8, 00, 00),
+            db.session.add(Temperatura(horario=datetime(2021, 6, 1, 8, 00, 00),
                                        temp1=50.50,
                                        temp2=51.25,
                                        temp3=50.81,
                                        temp4=49.25,
                                        temp5=50.50))
-            db.session.add(Temperatura(horario=datetime(2020, 6, 1, 9, 00, 00),
+            db.session.add(Temperatura(horario=datetime(2021, 6, 1, 9, 00, 00),
                                        temp1=77.50,
                                        temp2=68.25,
                                        temp3=75.81,
                                        temp4=80.25,
                                        temp5=64.50))
-            db.session.add(Temperatura(horario=datetime(2020, 6, 1, 9, 1, 00),
+            db.session.add(Temperatura(horario=datetime(2021, 6, 1, 9, 1, 00),
                                        temp1=76.50,
                                        temp2=70.25,
                                        temp3=76.75,

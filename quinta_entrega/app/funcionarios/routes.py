@@ -1,8 +1,10 @@
 from flask import Blueprint
 from app.funcionarios.controllers import FuncionariosGeral, FuncionariosParcicular, FuncionariosLogin
 
+# FuncionariosLogin:
+# - enviar dados de login
 # FuncionariosGeral: 
-# - lista de funcionarios 
+# - ver lista de funcionarios 
 # - adicionar funcionario
 # FuncionariosParcicular: 
 # - ver detalhes de um funcionario 

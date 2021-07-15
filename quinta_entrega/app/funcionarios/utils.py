@@ -6,12 +6,17 @@ from flask_jwt_extended import create_access_token
 import bcrypt
 from flask_mail import Message
 
+# aqui as funcionalidades dos metodos e outras funcoes sao definidas
+# tambem sao feitos os testes de validacao dos dados, para enviar os erros ao front
+
+# funcao para enviar email
 def email_login(nome, email, cargo):
     msg = Message(sender='email@email.com',
                   recipients=[email],
                   subject='Login efetuado!',
                   html=render_template('email.html', nome=nome, email=email, cargo=cargo))
 
+# funcao para efetuar login
 def login(dados):
     try:
         email = dados.get('email')
@@ -45,11 +50,13 @@ def login(dados):
     except:
         return {'error': 'ocorreu um erro'}, 400
 
+# funcao para listar todos os funcionarios
 def funcionarios():
     funcionarios = Funcionario.query.all()
 
     return jsonify([funcionario.json() for funcionario in funcionarios]), 200
 
+# funcao composta para ver, adicionar, editar e deletar funcionarios
 def funcionario_utilidades(dados, id_escolhido, metodo):
     if not isinstance(id_escolhido, int):
         return {'error': 'id_escolhido inválido'}, 400
