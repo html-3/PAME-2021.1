@@ -128,39 +128,37 @@ def peso_utilidades(dados, id_escolhido, metodo):
         if metodo == "PATCH":
             bolsa_id = dados.get('bolsa_id', peso.bolsa_id)
             peso_kg = dados.get('peso_kg', peso.peso_kg)
-            maquina_id = dados.get('maquina_id', peso.maquina_id)
+            #maquina_id = dados.get('maquina_id', peso.maquina_id)
 
         elif metodo == "POST":
             bolsa_id = dados.get('bolsa_id')
             peso_kg = dados.get('peso_kg')
-            maquina_id = dados.get('maquina_id')
+            #maquina_id = dados.get('maquina_id')
 
-        if bolsa_id == None or\
-           peso_kg == None or\
-           maquina_id == None:
+        if bolsa_id == None or peso_kg == None: #or maquina_id == None:
             return {'error': 'faltou algum dado'}, 400
 
         bolsa_id = str(bolsa_id)[0:12]
         peso_kg = round(float(peso_kg), 2)
-        maquina_id = int(maquina_id)
+        #maquina_id = int(maquina_id)
 
         if len(bolsa_id) < 12:
             return {'error': 'tipo inválido de bolsa_id'}
 
         if metodo == "POST":
-            maquina = Maquina.query.get_or_404(maquina_id)
+            #maquina = Maquina.query.get_or_404(maquina_id)
 
             peso = Peso(bolsa_id=bolsa_id,
-                        peso_kg=peso_kg,
-                        maquina=maquina)
+                        peso_kg=peso_kg#,maquina=maquina
+                        )
             db.session.add(peso)
 
         if metodo == "PATCH":
-            maquina = Maquina.query.get_or_404(maquina_id)
+            #maquina = Maquina.query.get_or_404(maquina_id)
 
             peso.bolsa_id = bolsa_id
             peso.peso_kg = peso_kg
-            peso.maquina = maquina
+            #peso.maquina = maquina
 
         db.session.commit()
 

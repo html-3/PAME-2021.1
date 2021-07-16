@@ -11,9 +11,6 @@ class MaquinasGeral(MethodView): # /maquinas
 
     def get(self):
         id_usuario = get_jwt_identity()
-        usuario = Funcionario.query.filter_by(id=id_usuario).first()
-        if usuario.adm != True:
-            return {'erro': 'acesso negado'}, 400
         return maquinas(id_usuario)
 
 
@@ -29,11 +26,14 @@ class MaquinasParticular(MethodView): # /maquina/<int:id_escolhido>
     decorators = [jwt_required()]
     
     def get(self, id_escolhido):
-        return maquina_utilidades(0, id_escolhido, "GET")
+        id_usuario = get_jwt_identity()
+        return maquina_utilidades(0, id_escolhido, "GET", id_usuario)
 
     def patch(self, id_escolhido):
+        id_usuario = get_jwt_identity()
         dados = request.json
-        return maquina_utilidades(dados, id_escolhido, "PATCH")
+        return maquina_utilidades(dados, id_escolhido, "PATCH", id_usuario)
     
     def delete(self, id_escolhido):
-        return maquina_utilidades(0, id_escolhido, "DELETE")
+        id_usuario = get_jwt_identity()
+        return maquina_utilidades(0, id_escolhido, "DELETE", id_usuario)

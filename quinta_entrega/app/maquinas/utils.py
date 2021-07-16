@@ -11,18 +11,20 @@ from app.association import tabela_funcionario_maquina
 
 # funcao para listar todas as maquinas
 def maquinas(id_usuario):
-    maquinas = Funcionario.query.filter_by(id=id_usuario).maquinas1
-
-    print(maquinas)
+    maquinas = Funcionario.query.get_or_404(id_usuario).maquinas
     return jsonify([maquina.json() for maquina in maquinas]), 200
 
 # funcao composta para ver, adicionar, editar e deletar maquinas
-def maquina_utilidades(dados, id_escolhido, metodo):
+def maquina_utilidades(dados, id_escolhido, metodo, id_usuario):
     if not isinstance(id_escolhido, int):
         return {'error': 'id_escolhido inválido'}, 400
     
     if metodo in ["GET", "PATCH", "DELETE"]:
+        maquinas = Funcionario.query.get_or_404(id_usuario).maquinas
         maquina = Maquina.query.get_or_404(id_escolhido)
+
+        if not maquina in maquinas:
+            return {'error': 'acesso negado à maquina'}, 400
 
     if metodo == "GET":
         return maquina.json(), 200

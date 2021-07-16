@@ -48,10 +48,9 @@ class Peso(db.Model):
 
     peso_kg = db.Column(db.Float, nullable=False)
 
-    maquina_id = db.Column(db.Integer, db.ForeignKey('maquina.id'))
+    #maquina_id = db.Column(db.Integer, db.ForeignKey('maquina.id'))
 
     def json(self):
         return {'bolsa_id': self.bolsa_id,
-                'peso_kg': self.peso_kg,
-                'maquina_id': self.maquina_id
+                'peso_kg': self.peso_kg#,'maquina_id': self.maquina_id
                }

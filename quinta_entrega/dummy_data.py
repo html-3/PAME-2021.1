@@ -95,23 +95,23 @@ def create_dd(app):
             
         if not Peso.query.first():
             db.session.add(Peso(bolsa_id="000000140721",
-                                peso_kg=20.20,
-                                maquina=maq1))
+                                peso_kg=20.20#,maquina=maq1
+                                ))
             db.session.add(Peso(bolsa_id="000001140721",
-                                peso_kg=20.00,
-                                maquina=maq2))
+                                peso_kg=20.00#,maquina=maq2
+                                ))
             db.session.add(Peso(bolsa_id="000002140721",
-                                peso_kg=19.90,
-                                maquina=maq3))
+                                peso_kg=19.90#,maquina=maq3
+                                ))
             db.session.add(Peso(bolsa_id="00000A140721",
-                                peso_kg=20.05,
-                                maquina=maq4))
+                                peso_kg=20.05#,maquina=maq4
+                                ))
             db.session.add(Peso(bolsa_id="00000B140721",
-                                peso_kg=21.00,
-                                maquina=maq5))
+                                peso_kg=21.00#,maquina=maq5
+                                ))
             db.session.add(Peso(bolsa_id="000003140721",
-                                peso_kg=20.05,
-                                maquina=maq5))
+                                peso_kg=20.05#,maquina=maq5
+                                ))
             
             db.session.commit()
 

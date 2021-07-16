@@ -30,7 +30,7 @@ class Funcionario(db.Model):
 
     adm = db.Column(db.Boolean, default=adm_base)
 
-    maquinas = db.relationship("Maquina", secondary=tabela_funcionario_maquina, backref='operadores', lazy=True)
+    maquinas = db.relationship("Maquina", secondary=tabela_funcionario_maquina, backref='operadores', lazy='joined')
 
     def json(self):
         return {'nome': self.nome,

@@ -26,7 +26,7 @@ class Maquina(db.Model):
 
     #operadores1 = db.relationship("Funcionario", secondary=tabela_funcionario_maquina, backref='maquinas1', lazy=True)
 
-    pesos_medidos = db.relationship("Peso", backref='maquina', lazy=True)
+    #pesos_medidos = db.relationship("Peso", backref='maquina', lazy=True)
 
     def json(self):
         return {'tipo': self.tipo,
