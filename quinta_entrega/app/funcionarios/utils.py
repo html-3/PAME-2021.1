@@ -1,8 +1,9 @@
 from flask import jsonify, render_template
 from app.extensions import db
 from app.funcionarios.model import Funcionario
+from app.maquinas.model import Maquina
 from sqlalchemy import exc
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, get_jwt_identity
 import bcrypt
 from flask_mail import Message
 
@@ -152,3 +153,27 @@ def funcionario_utilidades(dados, id_escolhido, metodo):
         return {'error': 'ocorreu um erro'}, 400
 
     return funcionario.json(), 200
+
+# decorador customizado para conferir se o usuario eh adm ou moderador
+def adm_requerido(func):
+    def wrapper_func():
+        id_usuario = get_jwt_identity()
+        usuario = Funcionario.query.filter_by(id=id_usuario).first()
+        if usuario.adm != True:
+            return {'erro': 'acesso negado'}, 400
+        func()
+    return wrapper_func
+
+
+# decorador customizado para conferir se o usuario eh operador
+# NAO FUNCIONA, fica como resquisio
+def operador_requerido(func, id_escolhido):
+    def wrapper_func():
+        id_usuario = get_jwt_identity()
+        maquinas = Funcionario.query.get_or_404(id_usuario).maquinas
+        maquina = Maquina.query.get_or_404(id_escolhido)
+
+        if not maquina in maquinas:
+            return {'error': 'acesso negado à maquina'}, 400
+        func()
+    return wrapper_func

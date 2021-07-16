@@ -19,6 +19,8 @@ def maquina_utilidades(dados, id_escolhido, metodo, id_usuario):
     if not isinstance(id_escolhido, int):
         return {'error': 'id_escolhido inválido'}, 400
     
+    # defina a maquina a ser vista, editada ou deletada 
+    # alem de conferir que ela seja operada pelo usuario
     if metodo in ["GET", "PATCH", "DELETE"]:
         maquinas = Funcionario.query.get_or_404(id_usuario).maquinas
         maquina = Maquina.query.get_or_404(id_escolhido)
