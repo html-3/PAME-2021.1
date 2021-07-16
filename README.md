@@ -7,4 +7,4 @@
 
 **Quarta Entrega:** Sistema web inicial para a distribuidora de farinha de uma fabrica
 
-**Quarta Entrega:** Sistema web completo para a distribuidora de farinha de uma fabrica
+**Quinta Entrega:** Sistema web completo para a distribuidora de farinha de uma fabrica
