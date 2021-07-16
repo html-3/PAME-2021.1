@@ -11,7 +11,11 @@ from app.association import tabela_funcionario_maquina
 
 # funcao para listar todas as maquinas
 def maquinas(id_usuario):
-    maquinas = Funcionario.query.get_or_404(id_usuario).maquinas
+    if Funcionario.query.get_or_404(id_usuario).adm == True:
+        maquinas = Funcionario.query.get_or_404(id_usuario).all()
+    else:
+        maquinas = Funcionario.query.get_or_404(id_usuario).maquinas
+        
     return jsonify([maquina.json() for maquina in maquinas]), 200
 
 # funcao composta para ver, adicionar, editar e deletar maquinas
